@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = PartTime::VERSION
   spec.authors       = ["Richard Bishop"]
   spec.email         = ["rbishop87@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{An In-memory background job processing library for Ruby applications that just don't work that hard.}
+  spec.summary       = %q{Lightweight, threaded in-memory background job processing}
+  spec.homepage      = "https://github.com/rjbishop/part_time"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
