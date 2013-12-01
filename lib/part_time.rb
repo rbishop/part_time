@@ -1,18 +1,27 @@
 require "part_time/job"
-require "part_time/queue"
+require "part_time/worker"
 require "part_time/version"
 
 module PartTime
-  def self.start
+  extend self
+
+  NUM_WORKERS = 3
+
+  def start(config = {})
     @queue = Queue.new
+    @workers = (config[:size] || NUM_WORKERS).times.map { Worker.new(queue) }
     @running = true
   end
 
-  def self.queue
+  def queue
     @queue
   end
 
-  def self.running?
+  def workers
+    @workers
+  end
+
+  def running?
     @running
   end
 end
