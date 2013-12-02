@@ -17,11 +17,11 @@ module PartTime
     @queue
   end
 
-  def workers
-    @workers
+  def running?
+    @workers.any?(&:working?)
   end
 
-  def running?
-    @running
+  def workers
+    @workers
   end
 end

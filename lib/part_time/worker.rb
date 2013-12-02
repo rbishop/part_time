@@ -2,7 +2,7 @@ module PartTime
   class Worker
     SHUTDOWN = "YOU'RE FIRED!"
 
-    attr_reader :queue
+    attr_accessor :queue
 
     def initialize(queue)
       @queue = queue
@@ -10,7 +10,7 @@ module PartTime
     end
 
     def work
-      Thread.new do
+      @thread ||= Thread.new do
         loop do
           job, args = *queue.pop
 
@@ -22,6 +22,10 @@ module PartTime
           job.new.perform(*args)
         end
       end
+    end
+
+    def join
+      @thread.join
     end
 
     def working?

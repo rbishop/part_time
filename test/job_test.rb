@@ -1,8 +1,5 @@
 require 'test_helper'
-
-class DummyJob
-  include ::PartTime::Job
-end
+require 'support/dummy_job'
 
 class JobTest < Minitest::Test
   def setup
@@ -10,7 +7,8 @@ class JobTest < Minitest::Test
   end
 
   def test_the_job_gets_added_to_the_queue
-    job = DummyJob.new
+    job = DummyJob.async
+
     assert_equal 1, PartTime.queue.size
   end
 end
