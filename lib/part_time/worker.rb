@@ -1,26 +1,25 @@
 module PartTime
   class Worker
-    SHUTDOWN = "YOU'RE FIRED!"
+    SHUTDOWN = "GO HOME!"
 
     attr_accessor :queue
 
     def initialize(queue)
       @queue = queue
-      @working = true
+      @on_the_clock = true
+
+      work
     end
 
     def work
       @thread ||= Thread.new do
         loop do
-          job, args = *queue.pop
-
-          if job == SHUTDOWN && args.nil?
-            @working = false
-            break
-          end
-
+          job, *args = queue.pop
+          break if job == SHUTDOWN
           job.new.perform(*args)
         end
+
+        @on_the_clock = false
       end
     end
 
@@ -28,8 +27,8 @@ module PartTime
       @thread.join
     end
 
-    def working?
-      @working
+    def on_the_clock?
+      @on_the_clock
     end
   end
 end

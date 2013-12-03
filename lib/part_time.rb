@@ -1,3 +1,4 @@
+require 'thread'
 require "part_time/job"
 require "part_time/worker"
 require "part_time/version"
@@ -8,17 +9,17 @@ module PartTime
   NUM_WORKERS = 3
 
   def start(config = {})
-    @queue = Queue.new
+    @queue = ::Queue.new
     @workers = (config[:size] || NUM_WORKERS).times.map { Worker.new(queue) }
     @running = true
   end
 
-  def queue
-    @queue
+  def running?
+    workers.any?(&:on_the_clock?)
   end
 
-  def running?
-    @workers.any?(&:working?)
+  def queue
+    @queue
   end
 
   def workers
