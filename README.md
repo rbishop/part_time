@@ -20,6 +20,12 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+## Todo
+
+* Timeouts
+* Retries
+* Graceful shutdowns
+
 ## Contributing
 
 1. Fork it
