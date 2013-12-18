@@ -1,7 +1,7 @@
 # Part-time
 
 Part-time is a multi-threaded, in-memory background job processing library for
-Ruby applications that just don't work that hard. 
+Ruby applications that just don't work that hard.
 
 ## Why
 
@@ -12,15 +12,20 @@ background. Part-time is the perfect background processing library for rapid
 prototyping and hackathons.
 
 Most background job processing libraries require they be run in a separate
-process and in most cases rrequire a whole other database such as Redis. This
+process and in most cases require a whole other database such as Redis. This
 adds a lot of overhead and complexity to applications that might not need
 something so robust. Extra processes also means more memory, and contrary to
 popular belief, memory isn't cheap when you're renting it. Part-time runs right
 in the same process as your Ruby application.
 
-Part-time's API also mimics Mike Perham's excellent
+Part-time's API mimics Mike Perham's excellent
 [Sidekiq](https://github.com/mperham/sidekiq) libary, so should your background
 processing needs grow, you can upgrade to Siedkiq with minimal effort.
+
+For serious multi-threading mayhem pair Part-time with the
+[Puma](https://github.com/puma/puma) web server to make your application so
+efficient that you'll have companies like Heroku and Engine Yard pulling their
+hair out.
 
 ## Installation
 
@@ -57,7 +62,7 @@ Bam! Part-time is now running and waiting for you to give it some work.
 Part-time tries hard to mirror the Sidekiq API. Classes that include the
 `PartTime::Job` module, define an instance method named `perform` will be added
 to the worker queue. Lets say we have a `FlipBurgers` job that we want to push
-tothe background:
+to the background:
 
 ```ruby
 # app/jobs/flip_burgers.rb
@@ -81,11 +86,6 @@ the `FlipBurgers` class:
 
 That's it! You're done. Now put that manual about process forking and Redis
 configuration down and get back to building your awesome application!
-
-For serious multi-threading mayhem pair Part-time with the
-[Puma](https://github.com/puma/puma) web server to make your application so
-efficient that you'll have companies like Heroku and Engine Yard pulling their
-hair out.
 
 ## A note about Ruby threads
 
