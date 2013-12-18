@@ -20,7 +20,7 @@ in the same process as your Ruby application.
 
 Part-time's API mimics Mike Perham's excellent
 [Sidekiq](https://github.com/mperham/sidekiq) libary, so should your background
-processing needs grow, you can upgrade to Siedkiq with minimal effort.
+processing needs grow, you can upgrade to Sidekiq with minimal effort.
 
 For serious multi-threading mayhem pair Part-time with the
 [Puma](https://github.com/puma/puma) web server to make your application so
