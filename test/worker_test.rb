@@ -18,7 +18,7 @@ class WorkerTest < Minitest::Test
 
   def test_stops_when_told_to_go_home
     @worker.queue.push "GO HOME!"
-    @worker.join
+    @worker.clock_out
 
     assert_equal false, @worker.on_the_clock?
   end
