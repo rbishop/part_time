@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'support/dummy_job'
+require 'support/testing'
 
 class JobTest < Minitest::Test
   def setup
@@ -15,6 +16,5 @@ class JobTest < Minitest::Test
   def test_job_gets_picked_up_and_ran
     DummyJob.any_instance.expects(:perform).with('test')
     DummyJob.perform_async('test')
-    Thread.pass
   end
 end

@@ -1,9 +1,10 @@
 require 'test_helper'
 require 'support/dummy_job'
+require 'support/testing'
 
 class WorkerTest < Minitest::Test
   def setup
-    @worker = PartTime::Worker.new(Queue.new)
+    @worker = PartTime::Worker.new([])
   end
 
   def test_works_on_jobs_in_queue
@@ -12,13 +13,12 @@ class WorkerTest < Minitest::Test
 
     @worker.queue.push([DummyJob, 'test'])
     @worker.queue.push([DummyJob, 'example'])
-
-    Thread.pass
+    @worker.work
   end
 
   def test_stops_when_told_to_go_home
     @worker.queue.push "GO HOME!"
-    @worker.clock_out
+    @worker.work
 
     assert_equal false, @worker.on_the_clock?
   end
